@@ -1,11 +1,11 @@
-import React from "react";
-import logo from "./logo.png";
-import "./App.css";
+import React, {useState, useEffect} from 'react';
+import logo from './logo.png'
+import './App.css';
 
 function App() {
-    const [data, setData] = React.useState(null);
+    const [data, setData] = useState(null);
 
-    React.useEffect(() => {
+    useEffect(() => {
         fetch("/api")
             .then((res) => res.json())
             .then((data) => setData(data.message));
