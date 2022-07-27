@@ -1,6 +1,7 @@
 import * as React from "react"
 import { Dispatch } from "redux"
 import { useDispatch } from "react-redux"
+import {ITheme} from "../types/theme";
 
 type Props = {
     theme: ITheme
