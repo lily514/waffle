@@ -1,7 +1,7 @@
 import {StrictMode} from 'react';
 import {createRoot} from 'react-dom/client';
-import { createStore, applyMiddleware, Store } from "redux"
-import { Provider } from "react-redux"
+import {createStore, applyMiddleware, Store} from "redux"
+import {Provider} from "react-redux"
 import thunk from "redux-thunk"
 import reportWebVitals from './reportWebVitals';
 import './index.css';
@@ -19,9 +19,9 @@ if (rootElement === null) throw new Error('Root container missing in index.html'
 const root = createRoot(rootElement);
 root.render(
     <Provider store={store}>
-  <StrictMode>
-    <App />
-  </StrictMode>
+        <StrictMode>
+            <App/>
+        </StrictMode>
     </Provider>
 );
 
