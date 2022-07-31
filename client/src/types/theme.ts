@@ -1,6 +1,7 @@
 import React from 'react'
+import {IModel} from "./model";
 
-export interface ITheme {
+export interface ITheme extends IModel {
     id: number
     name: string
 }
@@ -11,7 +12,7 @@ export type ThemeState = {
 
 export type ThemeAction = {
     type: string
-    theme: ITheme
+    model: ITheme
 }
 
-export type DispatchType = (args: ThemeAction) => ThemeAction
+export type ThemeDispatchType = (args: ThemeAction) => ThemeAction

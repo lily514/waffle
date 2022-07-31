@@ -1,24 +1,33 @@
 import * as actionTypes from "./actionTypes"
-import {DispatchType, ITheme, ThemeAction} from "../types/theme";
+import {ITheme, ThemeAction} from "../types/theme";
+import {IMeal, MealAction} from "../types/meal";
+import {ModelAction, DispatchType} from "../types/model"
 
 export function addTheme(theme: ITheme) {
     const action: ThemeAction = {
         type: actionTypes.ADD_THEME,
-        theme,
+        model: theme,
     }
-
     return simulateHttpRequest(action)
 }
 
 export function removeTheme(theme: ITheme) {
     const action: ThemeAction = {
         type: actionTypes.REMOVE_THEME,
-        theme,
+        model: theme,
     }
     return simulateHttpRequest(action)
 }
 
-export function simulateHttpRequest(action: ThemeAction) {
+export function addMeal(meal: IMeal) {
+    const action: MealAction = {
+        type: actionTypes.ADD_MEAL,
+        model: meal
+    }
+    return simulateHttpRequest(action)
+}
+
+export function simulateHttpRequest(action: ModelAction) {
     return (dispatch: DispatchType) => {
         setTimeout(() => {
             dispatch(action)

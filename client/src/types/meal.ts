@@ -1,9 +1,10 @@
 import React from 'react'
+import {IModel} from "./model";
 
-export interface IMeal {
-    id: number
-    name: string
-    notes: string
+export interface IMeal extends IModel {
+    themeId?: number
+    name?: string
+    notes?: string
 }
 
 export type MealState = {
@@ -12,7 +13,7 @@ export type MealState = {
 
 export type MealAction = {
     type: string
-    Meal: IMeal
+    model: IMeal
 }
 
-export type DispatchType = (args: MealAction) => MealAction
+export type MealDispatchType = (args: MealAction) => MealAction

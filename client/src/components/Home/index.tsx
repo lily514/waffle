@@ -1,17 +1,23 @@
 import React, {FunctionComponent} from "react";
 import {AddTheme} from "../Theme/AddTheme";
-import {ITheme, ThemeState} from "../../types/theme";
+import {ITheme} from "../../types/theme";
 import {ThemeListItem} from "../Theme/ThemeListItem";
-import {addTheme, removeTheme} from "../../store/actionCreators";
+import {addTheme, removeTheme, addMeal} from "../../store/actionCreators";
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import {Dispatch} from "redux";
-
 import './index.css'
+import {AddMeal} from "../Meal/AddMeal";
+import {IMeal} from "../../types/meal";
+import {ModelState} from '../../types/model'
 
 export const Home: FunctionComponent = () => {
 
     const themes: readonly ITheme[] = useSelector(
-        (state: ThemeState) => state.themes,
+        (state: ModelState) => state.themes,
+        shallowEqual
+    )
+    const meals: readonly IMeal[] = useSelector(
+        (state: ModelState) => state.meals,
         shallowEqual
     )
 
@@ -22,19 +28,34 @@ export const Home: FunctionComponent = () => {
         [dispatch]
     )
 
+    const saveMeal = React.useCallback(
+        (meal: IMeal) => dispatch(addMeal(meal)),
+        [dispatch]
+    )
+
     return (
         <div className="Home">
             <AddTheme saveTheme={saveTheme}/>
-            <br />
+            <br/>
             <h1>My food themes</h1>
             {
-                themes.map((theme: ITheme) => (
-                    <ThemeListItem
-                        key={theme.id}
-                        theme={theme}
-                        removeTheme={removeTheme}
-                    />
-                ))
+                themes.map((theme: ITheme) => {
+                    const themeMeals = meals.filter(m => m.themeId === theme.id)
+                    return (
+                        <div key={theme.id}>
+                            <ThemeListItem
+                                theme={theme}
+                                removeTheme={removeTheme}/>
+                            <AddMeal saveMeal={saveMeal} theme={theme}/>
+                            {themeMeals.length > 0 &&
+                                <ul>
+                                    {themeMeals.map(m => <li key={`theme-${theme.id}-meal-${m.id}`}>{m.name}: {m.notes}</li>)}
+                                </ul>
+                            }
+                        </div>
+                    )
+                })
+
             }
         </div>
     )

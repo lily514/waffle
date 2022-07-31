@@ -7,9 +7,9 @@ import reportWebVitals from './reportWebVitals';
 import './index.css';
 import App from './App';
 import reducer from "./store/reducer"
-import {DispatchType, ThemeAction, ThemeState} from "./types/theme";
+import {ModelState, ModelAction, DispatchType} from './types/model'
 
-const store: Store<ThemeState, ThemeAction> & {
+const store: Store<ModelState, ModelAction> & {
     dispatch: DispatchType
 } = createStore(reducer, applyMiddleware(thunk))
 
