@@ -1,6 +1,0 @@
-export const ADD_THEME = "ADD_THEME"
-export const REMOVE_THEME = "REMOVE_THEME"
-export const EDIT_THEME = "EDIT_THEME"
-export const ADD_MEAL = "ADD_MEAL"
-export const REMOVE_MEAL = "REMOVE_MEAL"
-export const EDIT_MEAL = "EDIT_MEAL"

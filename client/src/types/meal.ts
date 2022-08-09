@@ -6,14 +6,3 @@ export interface IMeal extends IModel {
     name?: string
     notes?: string
 }
-
-export type MealState = {
-    Meals: IMeal[]
-}
-
-export type MealAction = {
-    type: string
-    model: IMeal
-}
-
-export type MealDispatchType = (args: MealAction) => MealAction

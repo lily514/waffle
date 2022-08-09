@@ -2,37 +2,22 @@ import React, {FunctionComponent} from "react";
 import {AddTheme} from "../Theme/AddTheme";
 import {ITheme} from "../../types/theme";
 import {ThemeListItem} from "../Theme/ThemeListItem";
-import {addTheme, removeTheme, addMeal} from "../../store/actionCreators";
-import {shallowEqual, useDispatch, useSelector} from "react-redux";
-import {Dispatch} from "redux";
 import './index.css'
 import {AddMeal} from "../Meal/AddMeal";
 import {IMeal} from "../../types/meal";
-import {ModelState} from '../../types/model'
+import {useAppDispatch, useAppSelector} from "../../store/hooks";
+import { create as createTheme } from '../../store/themeSlice';
+import { create as createMeal } from '../../store/mealSlice';
+
 
 export const Home: FunctionComponent = () => {
 
-    const themes: readonly ITheme[] = useSelector(
-        (state: ModelState) => state.themes,
-        shallowEqual
-    )
-    const meals: readonly IMeal[] = useSelector(
-        (state: ModelState) => state.meals,
-        shallowEqual
-    )
+    const themes = useAppSelector(state => state.themes)
+    const meals = useAppSelector(state => state.meals)
+    const dispatch = useAppDispatch()
 
-    const dispatch: Dispatch<any> = useDispatch()
-
-    const saveTheme = React.useCallback(
-        (theme: ITheme) => dispatch(addTheme(theme)),
-        [dispatch]
-    )
-
-    const saveMeal = React.useCallback(
-        (meal: IMeal) => dispatch(addMeal(meal)),
-        [dispatch]
-    )
-
+    const saveTheme = (theme:ITheme) => dispatch(createTheme(theme))
+    const saveMeal = (meal:IMeal) => dispatch(createMeal(meal))
     return (
         <div className="Home">
             <AddTheme saveTheme={saveTheme}/>
@@ -44,8 +29,7 @@ export const Home: FunctionComponent = () => {
                     return (
                         <div key={theme.id}>
                             <ThemeListItem
-                                theme={theme}
-                                removeTheme={removeTheme}/>
+                                theme={theme}/>
                             <AddMeal saveMeal={saveMeal} theme={theme}/>
                             {themeMeals.length > 0 &&
                                 <ul>
