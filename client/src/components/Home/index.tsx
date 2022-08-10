@@ -4,7 +4,6 @@ import {ITheme} from "../../types/theme";
 import {ThemeListItem} from "../Theme/ThemeListItem";
 import './index.css'
 import {AddMeal} from "../Meal/AddMeal";
-import {IMeal} from "../../types/meal";
 import {useAppDispatch, useAppSelector} from "../../store/hooks";
 import { create as createTheme } from '../../store/themeSlice';
 import { create as createMeal } from '../../store/mealSlice';
@@ -16,8 +15,8 @@ export const Home: FunctionComponent = () => {
     const meals = useAppSelector(state => state.meals)
     const dispatch = useAppDispatch()
 
-    const saveTheme = (theme:ITheme) => dispatch(createTheme(theme))
-    const saveMeal = (meal:IMeal) => dispatch(createMeal(meal))
+    const saveTheme = (name: string) => dispatch(createTheme(name))
+    const saveMeal = (themeId: string, name: string, notes?: string) => dispatch(createMeal(themeId, name, notes))
     return (
         <div className="Home">
             <AddTheme saveTheme={saveTheme}/>

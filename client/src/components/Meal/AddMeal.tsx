@@ -1,29 +1,23 @@
-import {IMeal} from "../../types/meal";
 import React, {FormEvent, FunctionComponent, useState} from "react";
 import {ITheme} from "../../types/theme";
 
 type AddMealProps = {
-    saveMeal: (Meal: IMeal) => void
+    saveMeal: (themeId: string, name: string, notes?: string) => void
     theme: ITheme
 }
 export const AddMeal: FunctionComponent<AddMealProps> = ({saveMeal, theme}) => {
-    const [meal, setMeal] = useState<IMeal>({themeId: theme.id})
-
-    const onChange = (e: FormEvent<HTMLInputElement>) => {
-        setMeal({
-            ...meal,
-            [e.currentTarget.id]: e.currentTarget.value,
-        })
-    }
-
+    const [name, setName] = useState<string>('')
+    const [notes, setNotes] = useState<string | undefined>(undefined)
+    
     const isValid = () => {
-        return !!meal && !!meal.name && !!meal.themeId
+        return !!name && !!theme.id
     }
 
     const addNewMeal = (e: FormEvent) => {
         e.preventDefault()
-        saveMeal(meal)
-        setMeal({themeId: theme.id})
+        saveMeal(theme.id, name, notes)
+        setName('')
+        setNotes(undefined)
     }
 
     return (
@@ -34,13 +28,13 @@ export const AddMeal: FunctionComponent<AddMealProps> = ({saveMeal, theme}) => {
                     type="text"
                     id="name"
                     placeholder="Name"
-                    onChange={onChange}
+                    onChange={(e: FormEvent<HTMLInputElement>) => setName(e.currentTarget.value)}
                 />
                 <input
                     type="text"
                     id="notes"
                     placeholder="Notes"
-                    onChange={onChange}
+                    onChange={(e: FormEvent<HTMLInputElement>) => setNotes(e.currentTarget.value)}
                 />
                 <button disabled={!isValid()}>
                     Add Meal

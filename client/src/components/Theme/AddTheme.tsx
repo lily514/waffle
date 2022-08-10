@@ -1,23 +1,15 @@
-import {ITheme} from "../../types/theme";
 import React, {FormEvent, FunctionComponent, useState} from "react";
 
 type AddThemeProps = {
-    saveTheme: (theme: ITheme | any) => void
+    saveTheme: (name: string) => void
 }
 export const AddTheme: FunctionComponent<AddThemeProps> = ({saveTheme}) => {
-    const [theme, setTheme] = useState<ITheme | {}>()
-
-    const onChange = (e: FormEvent<HTMLInputElement>) => {
-        setTheme({
-            ...theme,
-            [e.currentTarget.id]: e.currentTarget.value,
-        })
-    }
+    const [name, setName] = useState<string>('')
 
     const addNewTheme = (e: FormEvent) => {
         e.preventDefault()
-        saveTheme(theme)
-        setTheme(undefined)
+        saveTheme(name)
+        setName('')
     }
 
     return (
@@ -29,9 +21,9 @@ export const AddTheme: FunctionComponent<AddThemeProps> = ({saveTheme}) => {
                     type="text"
                     id="name"
                     placeholder="Name"
-                    onChange={onChange}
+                    onChange={(e: FormEvent<HTMLInputElement>) => setName(e.currentTarget.value)}
                 />
-                <button disabled={theme === undefined}>
+                <button disabled={name === undefined || name === ''}>
                     Add theme
                 </button>
             </form>
