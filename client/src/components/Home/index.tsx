@@ -11,7 +11,7 @@ import {useGetAllThemesQuery} from "../../store/api";
 
 
 export const Home: FunctionComponent = () => {
-    const {data: themeResponse, isLoading, isFetching} = useGetAllThemesQuery({})
+    const {data: themes, isLoading, isFetching} = useGetAllThemesQuery({})
     
     const meals = useAppSelector(state => state.meals)
     const dispatch = useAppDispatch()
@@ -25,7 +25,7 @@ export const Home: FunctionComponent = () => {
             <h1>My food themes</h1>
             {isLoading && <div>Loading</div>}
             {isFetching && <div>Fetching</div>}
-            {!themeResponse?.getAllThemes ? <div>No themes</div> : themeResponse.getAllThemes.map((theme: ITheme) => {
+            {!themes ? <div>No themes</div> : themes.map((theme: ITheme) => {
                 const themeMeals = meals.filter(m => m.themeId === theme.id)
                 return (
                     <div key={theme.id}>

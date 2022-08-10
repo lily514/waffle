@@ -1,14 +1,16 @@
 import React, {FormEvent, FunctionComponent, useState} from "react";
+import {useAddThemeMutation} from "../../store/api";
 
 type AddThemeProps = {
     saveTheme: (name: string) => void
 }
 export const AddTheme: FunctionComponent<AddThemeProps> = ({saveTheme}) => {
     const [name, setName] = useState<string>('')
-
+    const [addTheme, {isLoading}] = useAddThemeMutation()
+    
     const addNewTheme = (e: FormEvent) => {
         e.preventDefault()
-        saveTheme(name)
+        addTheme(name)
         setName('')
     }
 
@@ -23,7 +25,7 @@ export const AddTheme: FunctionComponent<AddThemeProps> = ({saveTheme}) => {
                     placeholder="Name"
                     onChange={(e: FormEvent<HTMLInputElement>) => setName(e.currentTarget.value)}
                 />
-                <button disabled={name === undefined || name === ''}>
+                <button disabled={name === undefined || name === '' || isLoading}>
                     Add theme
                 </button>
             </form>
