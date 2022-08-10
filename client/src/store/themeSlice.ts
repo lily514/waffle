@@ -5,16 +5,7 @@ import {v4 as uuidv4} from 'uuid';
 
 export type ThemeState = ITheme[]
 
-const initialState: ThemeState = [
-    {
-        id: "1",
-        name: "waffles"
-    },
-    {
-        id: "2",
-        name: "tacos"
-    }
-]
+const initialState: ThemeState = []
 
 export const themeSlice = createSlice({
     name: 'themes',
