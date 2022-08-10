@@ -4,13 +4,22 @@ const Schema = gql`
     id: ID!
     name: String
   }
-  #handle user commands
+  type Meal {
+    id: ID!
+    themeId: ID!
+    name: String!
+    notes: String
+  }
   type Query {
-    getAllThemes: [Theme] #will return multiple themes
-    getTheme(id: String): Theme #has an argument of 'id' of type Integer.
+    getAllThemes: [Theme]
+    getTheme(id: ID!): Theme
+    getAllMeals: [Meal]
+    getMealsForTheme(themeId: ID!): [Meal]
+    getMeal(id: ID!): Meal
   }
   type Mutation {
     addTheme(name: String): Theme
+    addMeal(themeId: ID!, name: String!, notes: String): Meal
   }
 `;
 export default Schema; 

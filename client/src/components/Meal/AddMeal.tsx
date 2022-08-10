@@ -1,13 +1,14 @@
 import React, {FormEvent, FunctionComponent, useState} from "react";
 import {ITheme} from "../../types/theme";
+import {useAddMealMutation} from "../../store/api";
 
 type AddMealProps = {
-    saveMeal: (themeId: string, name: string, notes?: string) => void
     theme: ITheme
 }
-export const AddMeal: FunctionComponent<AddMealProps> = ({saveMeal, theme}) => {
+export const AddMeal: FunctionComponent<AddMealProps> = ({theme}) => {
     const [name, setName] = useState<string>('')
-    const [notes, setNotes] = useState<string | undefined>(undefined)
+    const [notes, setNotes] = useState<string>('')
+    const [addMeal, {isLoading}] = useAddMealMutation()
     
     const isValid = () => {
         return !!name && !!theme.id
@@ -15,9 +16,9 @@ export const AddMeal: FunctionComponent<AddMealProps> = ({saveMeal, theme}) => {
 
     const addNewMeal = (e: FormEvent) => {
         e.preventDefault()
-        saveMeal(theme.id, name, notes)
+        addMeal({themeId: theme.id, name: name, notes: notes})
         setName('')
-        setNotes(undefined)
+        setNotes('')
     }
 
     return (
@@ -28,15 +29,17 @@ export const AddMeal: FunctionComponent<AddMealProps> = ({saveMeal, theme}) => {
                     type="text"
                     id="name"
                     placeholder="Name"
+                    value={name}
                     onChange={(e: FormEvent<HTMLInputElement>) => setName(e.currentTarget.value)}
                 />
                 <input
                     type="text"
                     id="notes"
                     placeholder="Notes"
+                    value={notes}
                     onChange={(e: FormEvent<HTMLInputElement>) => setNotes(e.currentTarget.value)}
                 />
-                <button disabled={!isValid()}>
+                <button disabled={!isValid() || isLoading}>
                     Add Meal
                 </button>
             </form>

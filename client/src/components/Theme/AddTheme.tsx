@@ -1,10 +1,7 @@
 import React, {FormEvent, FunctionComponent, useState} from "react";
 import {useAddThemeMutation} from "../../store/api";
 
-type AddThemeProps = {
-    saveTheme: (name: string) => void
-}
-export const AddTheme: FunctionComponent<AddThemeProps> = ({saveTheme}) => {
+export const AddTheme: FunctionComponent = () => {
     const [name, setName] = useState<string>('')
     const [addTheme, {isLoading}] = useAddThemeMutation()
     
