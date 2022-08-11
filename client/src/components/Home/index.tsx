@@ -4,15 +4,12 @@ import {ITheme} from "../../types/theme";
 import {ThemeListItem} from "../Theme/ThemeListItem";
 import './index.css'
 import {AddMeal} from "../Meal/AddMeal";
-import {useGetAllThemesQuery, useGetAllMealsQuery} from "../../store/api";
+import {useGetAllThemesAndMealsQuery} from "../../store/api";
 
 
 export const Home: FunctionComponent = () => {
-    const {data: themes, isLoading: isLoadingThemes, isFetching: isFetchingThemes} = useGetAllThemesQuery()
-    const {data: meals, isLoading: isLoadingMeals, isFetching: isFetchingMeals} = useGetAllMealsQuery()
-    
-    const isLoading = isLoadingMeals || isLoadingThemes
-    const isFetching = isFetchingMeals || isFetchingThemes
+    const {data, isLoading, isFetching} = useGetAllThemesAndMealsQuery()
+    console.log(data)
     
     return (
         <div className="Home">
@@ -21,8 +18,8 @@ export const Home: FunctionComponent = () => {
             <h1>My food themes</h1>
             {isLoading && <div>Loading</div>}
             {isFetching && <div>Fetching</div>}
-            {!themes ? <div>No themes</div> : themes.map((theme: ITheme) => {
-                const themeMeals = meals?.filter(m => m.themeId === theme.id)
+            {!data?.themes ? <div>No themes</div> : data.themes.map((theme: ITheme) => {
+                const themeMeals = data.meals?.filter(m => m.themeId === theme.id)
                 return (
                     <div key={theme.id}>
                         <ThemeListItem

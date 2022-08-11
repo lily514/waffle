@@ -12,6 +12,9 @@ const Resolvers = {
         },
         getMealsForTheme: (_: any, args: { themeId: string}) => {
             return data.meals.find((meal) => meal.themeId === args.themeId)
+        },
+        getAllThemesAndMeals: () => {
+            return data
         }
     },
     Mutation: {
@@ -23,6 +26,12 @@ const Resolvers = {
             data.themes.push(newTheme)
             return newTheme;
         },
+        deleteTheme:  (_: any, args: {id: string} ) => {
+            const theme = data.themes.find(th => th.id == args.id)
+            data.themes = data.themes.filter(th => th.id !== args.id)
+            data.meals = data.meals.filter(m => m.themeId !== args.id)
+            return theme
+        },
         addMeal: (_: any, args: { themeId: string, name: string, notes?: string}) => {
             // TODO validate that themeId exists
             const newMeal = {
@@ -33,7 +42,7 @@ const Resolvers = {
             }
             data.meals.push(newMeal)
             return newMeal
-        }
+        },
     }
 };
 export default Resolvers;
