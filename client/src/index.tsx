@@ -5,17 +5,20 @@ import reportWebVitals from './reportWebVitals';
 import './index.css';
 import App from './App';
 import store from "./store/reducer"
+import {BrowserRouter} from "react-router-dom";
 
 const rootElement = document.getElementById('root')
 if (rootElement === null) throw new Error('Root container missing in index.html')
 
 const root = createRoot(rootElement);
 root.render(
-    <Provider store={store}>
-        <StrictMode>
-            <App/>
-        </StrictMode>
-    </Provider>
+    <BrowserRouter>
+        <Provider store={store}>
+            <StrictMode>
+                <App/>
+            </StrictMode>
+        </Provider>
+    </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function

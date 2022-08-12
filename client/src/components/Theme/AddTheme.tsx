@@ -26,6 +26,7 @@ export const AddTheme: FunctionComponent = () => {
                     Add theme
                 </button>
             </form>
+            <p>Need ideas? Use one of our default themes: Mexican Food</p>
         </div>
     )
 }
