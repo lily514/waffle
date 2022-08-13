@@ -1,5 +1,4 @@
-import {Link} from "react-router-dom";
-import logo from "../logo.png";
+import {useNavigate} from "react-router-dom";
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -11,21 +10,17 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import {Dictionary} from "@reduxjs/toolkit";
 
 // Based on https://mui.com/material-ui/react-app-bar/#ResponsiveAppBar.tsx
 
-const pages = ['Home', 'Themes', 'Plan'];
-const linkDictionary: Dictionary<string> = {
-    'Home': '/',
-    'Themes': '/themes',
-    'Plan': '/'
-}
+const pages = [{ name:'Home', path: '/'}, {name: 'Themes', path: '/themes'}, {name: 'Weekly Plan', path: '/plan'}];
+
 //const settings = ['Logout'];
 
 const NavBar = () => {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+    let navigate = useNavigate()
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -34,8 +29,9 @@ const NavBar = () => {
         setAnchorElUser(event.currentTarget);
     };
 
-    const handleCloseNavMenu = () => {
+    const handleCloseNavMenu = (path: string) => {
         setAnchorElNav(null);
+        navigate(path)
     };
 
     const handleCloseUserMenu = () => {
@@ -46,7 +42,6 @@ const NavBar = () => {
         <AppBar position="static">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    <img src={logo} className="App-logo" alt="logo"/>
                     <Typography
                         variant="h6"
                         noWrap
@@ -94,9 +89,9 @@ const NavBar = () => {
                                 display: { xs: 'block', md: 'none' },
                             }}
                         >
-                            {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page}</Typography>
+                            {pages.map(({name, path}) => (
+                                <MenuItem key={name} onClick={() =>handleCloseNavMenu(path)}>
+                                    <Typography textAlign="center">{name}</Typography>
                                 </MenuItem>
                             ))}
                         </Menu>
@@ -120,13 +115,9 @@ const NavBar = () => {
                         WAFFLE
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {pages.map((page) => (
-                            <Button
-                                key={page}
-                                onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
-                            >
-                                {page}
+                        {pages.map(({name, path}) => (
+                            <Button key={name} onClick={() => handleCloseNavMenu(path)} sx={{ my: 2, color: 'white', display: 'block' }}>
+                                {name}
                             </Button>
                         ))}
                     </Box>

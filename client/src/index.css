@@ -9,3 +9,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.App-logo {
+  height: 20vmin;
+  pointer-events: none;
+  padding: 1rem;
+}
