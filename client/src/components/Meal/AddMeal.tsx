@@ -1,6 +1,7 @@
 import React, {FormEvent, FunctionComponent, useState} from "react";
 import {ITheme} from "../../types/theme";
 import {useAddMealMutation} from "../../store/api";
+import Button from "@mui/material/Button";
 
 type AddMealProps = {
     theme: ITheme
@@ -39,9 +40,9 @@ export const AddMeal: FunctionComponent<AddMealProps> = ({theme}) => {
                     value={notes}
                     onChange={(e: FormEvent<HTMLInputElement>) => setNotes(e.currentTarget.value)}
                 />
-                <button disabled={!isValid() || isLoading}>
+                <Button disabled={!isValid() || isLoading}>
                     Add Meal
-                </button>
+                </Button>
             </form>
         </div>
     )

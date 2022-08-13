@@ -1,5 +1,6 @@
 import React, {FormEvent, FunctionComponent, useState} from "react";
 import {useAddThemeMutation} from "../../store/api";
+import Button from "@mui/material/Button";
 
 export const AddTheme: FunctionComponent = () => {
     const [name, setName] = useState<string>('')
@@ -22,9 +23,9 @@ export const AddTheme: FunctionComponent = () => {
                     placeholder="Name"
                     onChange={(e: FormEvent<HTMLInputElement>) => setName(e.currentTarget.value)}
                 />
-                <button disabled={name === undefined || name === '' || isLoading}>
+                <Button disabled={name === undefined || name === '' || isLoading}>
                     Add theme
-                </button>
+                </Button>
             </form>
             <p>Need ideas? Use one of our default themes: Mexican Food</p>
         </div>

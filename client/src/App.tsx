@@ -9,29 +9,33 @@ import {
 } from "react-router-dom";
 import {Themes} from "./components/Theme";
 import {AddTheme} from "./components/Theme/AddTheme";
+import {createTheme, ThemeOptions, ThemeProvider} from "@mui/material";
+import NavBar from "./components/NavBar";
+
+export const themeOptions: ThemeOptions = {
+    palette: {
+        primary: {
+            main: '#892833',
+        },
+        secondary: {
+            main: '#FBD11E',
+        },
+    },
+};
+
+const theme = createTheme(themeOptions)
 
 export default function App() {
     return (
+        <ThemeProvider theme={theme}>
         <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo"/>
-                <p>Hello from waffles!</p>
-                <nav>
-                    <ul>
-                        <li>
-                            <Link to="/">Home</Link>
-                        </li>
-                        <li>
-                            <Link to="/themes">Themes</Link>
-                        </li>
-                    </ul>
-                </nav>
-            </header>
+            <NavBar />
             <Routes>
                 <Route path="/" element={<Home/>}/>
                 <Route path="/themes" element={<Themes/>}/>
                 <Route path="/themes/new" element={<AddTheme/>}/>
             </Routes>
         </div>
+        </ThemeProvider>
     );
 }

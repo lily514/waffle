@@ -6,6 +6,11 @@ import './index.css';
 import App from './App';
 import store from "./store/reducer"
 import {BrowserRouter} from "react-router-dom";
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+
 
 const rootElement = document.getElementById('root')
 if (rootElement === null) throw new Error('Root container missing in index.html')
