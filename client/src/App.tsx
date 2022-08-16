@@ -2,11 +2,9 @@ import React from 'react';
 import {Home} from "./components/Home";
 import {
     Routes,
-    Route,
-    Link
+    Route
 } from "react-router-dom";
 import {Themes} from "./components/Theme";
-import {AddTheme} from "./components/Theme/AddTheme";
 import {Box, createTheme, ThemeOptions, ThemeProvider, responsiveFontSizes} from "@mui/material";
 import NavBar from "./components/NavBar";
 import {WeeklyPlan} from "./components/Plan";
@@ -60,7 +58,6 @@ export default function App() {
             <Routes>
                 <Route path="/" element={<Home/>}/>
                 <Route path="/themes" element={<Themes/>}/>
-                <Route path="/themes/new" element={<AddTheme/>}/>
                 <Route path="/plan" element={<WeeklyPlan/>}/>
             </Routes>
             </Box>
