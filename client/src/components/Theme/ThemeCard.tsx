@@ -27,10 +27,7 @@ export const ThemeCard: React.FC<Props> = ({theme, meals}) => {
     const [deleteMeal] = useDeleteMealMutation()
 
     return (
-        <Card sx={{
-            mr: 2,
-            mb: 2
-        }}>
+        <Card sx={{height: 1}}>
             <CardContent>
                 <CardHeader 
                     title={
@@ -48,7 +45,7 @@ export const ThemeCard: React.FC<Props> = ({theme, meals}) => {
                     </Typography>} 
                     action={<Button variant="text" onClick={() => deleteTheme(theme.id)}>Delete</Button>}
                 />
-                {meals.length > 0 &&
+                {meals.length > 0 ?
                     <List>
                         {meals.map(m =>
                             <ListItem key={m.name} secondaryAction={
@@ -57,8 +54,8 @@ export const ThemeCard: React.FC<Props> = ({theme, meals}) => {
                                 </IconButton>}>
                                 <ListItemText primary={m.name} secondary={m.notes ?? null}/>
                             </ListItem>)}
-                    </List>}
-                <CardActions>
+                    </List> : <Typography sx={{pl: 2}}>No meals yet.</Typography>}
+                <CardActions sx={{flex: "bottom"}}>
                     <MealFormDialog theme={theme}/>
                 </CardActions>
             </CardContent>
