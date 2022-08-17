@@ -12,17 +12,18 @@ export const Themes: FunctionComponent = () => {
 
     return (
         <>
-            <Box display={"flex"} flex-direction={"row"} justifyContent={'justify'} sx={{mb: 5}}>
-                <Typography variant="h1" sx={{mr: 2}}>My food themes</Typography>
-                <ThemeFormDialog />
-            </Box>
+            <Grid2 container spacing={2}>
+                <Grid2 xs={12} sm={10}>
+                <Typography variant="h1" sx={{mr: 2}}>My food themes</Typography></Grid2>
+                <Grid2 xs={12} sm={2}><ThemeFormDialog /></Grid2>
+            </Grid2>
             <Grid2 container spacing={2}>
                 {isLoading && <div>Loading</div>}
                 {isFetching && <div>Fetching</div>}
                 {!data?.themes 
                     ? <div>No themes</div> 
                     : data.themes.map((theme: ITheme) => 
-                        <Grid2 xs={4}>
+                        <Grid2 xs={12} sm={4}>
                             <ThemeCard key={theme.id} theme={theme} meals={data.meals.filter(m => m.themeId === theme.id)}/>
                         </Grid2>)
                 }
