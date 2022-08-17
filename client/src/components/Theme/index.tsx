@@ -23,8 +23,8 @@ export const Themes: FunctionComponent = () => {
                 {!data?.themes 
                     ? <div>No themes</div> 
                     : data.themes.map((theme: ITheme) => 
-                        <Grid2 xs={12} sm={4}>
-                            <ThemeCard key={theme.id} theme={theme} meals={data.meals.filter(m => m.themeId === theme.id)}/>
+                        <Grid2 key={theme.id} xs={12} sm={4}>
+                            <ThemeCard theme={theme} meals={data.meals.filter(m => m.themeId === theme.id)}/>
                         </Grid2>)
                 }
             </Grid2>
