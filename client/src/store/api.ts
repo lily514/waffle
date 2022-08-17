@@ -131,9 +131,22 @@ export const api = createApi({
             }),
             invalidatesTags: [{type: 'Meals', id: 'LIST'}],
         }),
+        deleteMeal: build.mutation<{ id: string }, string>({
+            query: (id) => ({
+                document: gql`mutation deleteMeal($id: ID) {
+                  deleteMeal(id: $id) {
+                    id
+                  }
+                }`,
+                variables: {
+                    id
+                }
+            }),
+            invalidatesTags: (results, error, id) => [{type: 'Meals', id: 'LIST'}, {type: 'Meals', id: id}],
+        }),
     }),
 })
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const {useGetAllThemesAndMealsQuery, useGetAllThemesQuery, useAddThemeMutation, useDeleteThemeMutation, useGetAllMealsQuery, useAddMealMutation} = api
+export const {useGetAllThemesAndMealsQuery, useGetAllThemesQuery, useAddThemeMutation, useDeleteThemeMutation, useGetAllMealsQuery, useAddMealMutation, useDeleteMealMutation} = api

@@ -43,6 +43,11 @@ const Resolvers = {
             data.meals.push(newMeal)
             return newMeal
         },
+        deleteMeal:  (_: any, args: {id: string} ) => {
+            const meal = data.meals.find(m => m.id == m.id)
+            data.meals = data.meals.filter(m => m.id !== args.id)
+            return meal
+        },
     }
 };
 export default Resolvers;

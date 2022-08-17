@@ -26,6 +26,7 @@ const Schema = gql`
     addTheme(name: String): Theme
     deleteTheme(id: ID): Theme
     addMeal(themeId: ID!, name: String!, notes: String): Meal
+    deleteMeal(id: ID): Meal
   }
 `;
 export default Schema; 
