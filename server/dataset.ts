@@ -6,6 +6,26 @@ let themes: {id: string, name: string}[] = [
     {
         id: "2",
         name: "tacos"
+    },
+    {
+        id: "3",
+        name: "meatless"
+    },
+    {
+        id: "4",
+        name: "slow cooker"
+    },
+    {
+        id: "5",
+        name: "salad"
+    },
+    {
+        id: "6",
+        name: "takeout"
+    },
+    {
+        id: "7",
+        name: "pasta"
     }
 ]
 let meals: {id: string, themeId: string, name: string, notes?: string}[] = [
@@ -39,5 +59,44 @@ let meals: {id: string, themeId: string, name: string, notes?: string}[] = [
         name: "Street Taco",
         notes: "Corn tortilla, cilantro, onion, steak"
     },
+    {
+        id: "6",
+        themeId: "3",
+        name: "Taco bowl",
+        notes: "Rice, black beans, avocado, corn, salsa"
+    },
+    {
+        id: "7",
+        themeId: "4",
+        name: "Chili",
+        notes: "Tomato sauce, beef, kidney beans"
+    },
+    {
+        id: "8",
+        themeId: "5",
+        name: "Greek Salad",
+        notes: "Falafel, red onion, kalamata olives, cucumber, tomato, feta"
+    },
+    {
+        id: "9",
+        themeId: "6",
+        name: "Panda express"
+    },
+    {
+        id: "10",
+        themeId: "7",
+        name: "Spaghetti",
+        notes: "with meatballs"
+    },
 ]
-export default { themes: themes, meals: meals};
+let weekdays: {id: string, name: string}[] = [
+    {id: "1", name: "Monday"},
+    {id: "2", name: "Tuesday"},
+    {id: "3", name: "Wednesday"},
+    {id: "4", name: "Thursday"},
+    {id: "5", name: "Friday"},
+    {id: "6", name: "Saturday"},
+    {id: "7", name: "Sunday"}
+]
+let weekdayPlan: {id: string, weekdayId: string, themeId: string, mealId: string}[] = []
+export default { themes, meals, weekdays, weekdayPlan};
