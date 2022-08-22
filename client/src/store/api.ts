@@ -3,6 +3,7 @@ import type {ITheme} from '../types/theme'
 import {gql} from 'graphql-request'
 import {graphqlRequestBaseQuery} from '@rtk-query/graphql-request-base-query'
 import {IMeal} from "../types/meal";
+import {IWeeklyPlan} from "../types/plan"
 
 export interface GetAllThemesResponse {
     getAllThemes: ITheme[]
@@ -19,6 +20,10 @@ type ThemesAndMeals = {
 
 export interface GetAllThemesAndMealsResponse {
     getAllThemesAndMeals: ThemesAndMeals
+}
+
+export interface GetWeeklyPlan {
+    getWeeklyPlan: IWeeklyPlan
 }
 
 // Define a service using a base URL and expected endpoints
@@ -144,9 +149,39 @@ export const api = createApi({
             }),
             invalidatesTags: (results, error, id) => [{type: 'Meals', id: 'LIST'}, {type: 'Meals', id: id}],
         }),
+        getWeeklyPlan: build.query<IWeeklyPlan, void>({
+            query: () => ({
+                document: gql`query GetWeeklyPlan{
+                    getWeeklyPlan {
+                        id
+                        weekday {
+                            id
+                            name
+                        }
+                        theme {
+                            id
+                            name
+                        }
+                        meal {
+                            id
+                            name
+                        }
+                    }
+                }`
+            }),
+            transformResponse: (response: GetWeeklyPlan) => response.getWeeklyPlan,
+        })
     }),
 })
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const {useGetAllThemesAndMealsQuery, useGetAllThemesQuery, useAddThemeMutation, useDeleteThemeMutation, useGetAllMealsQuery, useAddMealMutation, useDeleteMealMutation} = api
+export const {
+    useGetAllThemesAndMealsQuery, 
+    useGetAllThemesQuery, 
+    useAddThemeMutation, 
+    useDeleteThemeMutation, 
+    useGetAllMealsQuery, 
+    useAddMealMutation, 
+    useDeleteMealMutation,
+    useGetWeeklyPlanQuery } = api

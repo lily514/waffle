@@ -31,7 +31,7 @@ const Schema = gql`
     getMealsForTheme(themeId: ID!): [Meal]
     getMeal(id: ID!): Meal
     getAllThemesAndMeals: ThemesAndMeals
-    getWeekdayPlan: [WeekdayPlan]
+    getWeeklyPlan: [WeekdayPlan]
   }
   type Mutation {
     addTheme(name: String): Theme

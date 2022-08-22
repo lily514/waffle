@@ -1,4 +1,4 @@
-import data from "./dataset";
+import data, {defaultWeeklyPlan} from "./dataset";
 import {randomUUID} from "crypto";
 const Resolvers = {
     Query: {
@@ -14,7 +14,18 @@ const Resolvers = {
             return data.meals.find((meal) => meal.themeId === args.themeId)
         },
         getAllThemesAndMeals: () => {
-            return data
+            return {meals: data.meals, themes: data.themes}
+        },
+        getWeeklyPlan: () => {
+            if (data.weekdayPlan.length == 0) {
+                data.weekdayPlan = defaultWeeklyPlan
+            }
+            return data.weekdayPlan.map((plan) => { return {
+                id: plan.id,
+                weekday: data.weekdays.find(d => d.id == plan.weekdayId),
+                theme: data.themes.find(t => t.id == plan.themeId),
+                meal: data.themes.find(m => m.id == plan.mealId)
+            }})
         }
     },
     Mutation: {

@@ -98,5 +98,37 @@ let weekdays: {id: string, name: string}[] = [
     {id: "6", name: "Saturday"},
     {id: "7", name: "Sunday"}
 ]
-let weekdayPlan: {id: string, weekdayId: string, themeId: string, mealId: string}[] = []
+let weekdayPlan: {id: string, weekdayId: string, themeId?: string, mealId?: string}[] = []
+
+export const defaultWeeklyPlan = [
+    {
+        id: '1',
+        weekdayId: '1'
+    },
+    {
+        id: '2',
+        weekdayId: '2'
+    },
+    {
+        id: '3',
+        weekdayId: '3'
+    },
+    {
+        id: '4',
+        weekdayId: '4'
+    },
+    {
+        id: '5',
+        weekdayId: '5'
+    },
+    {
+        id: '6',
+        weekdayId: '6'
+    },
+    {
+        id: '7',
+        weekdayId: '7'
+    }
+]
+
 export default { themes, meals, weekdays, weekdayPlan};
